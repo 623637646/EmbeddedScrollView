@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,7 @@
 		5CE358842601AC8200959B73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CE358822601AC8200959B73 /* Main.storyboard */; };
 		5CE358862601AC8700959B73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CE358852601AC8700959B73 /* Assets.xcassets */; };
 		5CE358892601AC8700959B73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CE358872601AC8700959B73 /* LaunchScreen.storyboard */; };
+		5CE358B02601C3DA00959B73 /* OCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE358AF2601C3DA00959B73 /* OCViewController.m */; };
 		E8D884DEAF4B95D194B5BCA0 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 091704D89565B6EFF08F2FA7 /* Pods_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,9 @@
 		5CE358852601AC8700959B73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5CE358882601AC8700959B73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5CE3588A2601AC8700959B73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CE358AD2601C3D900959B73 /* Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Example-Bridging-Header.h"; sourceTree = "<group>"; };
+		5CE358AE2601C3DA00959B73 /* OCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCViewController.h; sourceTree = "<group>"; };
+		5CE358AF2601C3DA00959B73 /* OCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCViewController.m; sourceTree = "<group>"; };
 		6FC8604E301DE7368F22C962 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,6 +70,9 @@
 				5CE3587C2601AC8200959B73 /* AppDelegate.swift */,
 				5CE3587E2601AC8200959B73 /* SceneDelegate.swift */,
 				5CE358802601AC8200959B73 /* ViewController.swift */,
+				5CE358AE2601C3DA00959B73 /* OCViewController.h */,
+				5CE358AF2601C3DA00959B73 /* OCViewController.m */,
+				5CE358AD2601C3D900959B73 /* Example-Bridging-Header.h */,
 				5CE358822601AC8200959B73 /* Main.storyboard */,
 				5CE358852601AC8700959B73 /* Assets.xcassets */,
 				5CE358872601AC8700959B73 /* LaunchScreen.storyboard */,
@@ -88,7 +95,6 @@
 				6FC8604E301DE7368F22C962 /* Pods-Example.debug.xcconfig */,
 				27D6480DDF71C4D974013543 /* Pods-Example.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -125,6 +131,7 @@
 				TargetAttributes = {
 					5CE358782601AC8200959B73 = {
 						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
 					};
 				};
 			};
@@ -208,6 +215,7 @@
 			files = (
 				5CE358812601AC8200959B73 /* ViewController.swift in Sources */,
 				5CE3587D2601AC8200959B73 /* AppDelegate.swift in Sources */,
+				5CE358B02601C3DA00959B73 /* OCViewController.m in Sources */,
 				5CE3587F2601AC8200959B73 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,6 +364,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZQ7TZ3Q272;
 				INFOPLIST_FILE = Example/Info.plist;
@@ -365,6 +374,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yanni.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Example/Example-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -376,6 +387,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ZQ7TZ3Q272;
 				INFOPLIST_FILE = Example/Info.plist;
@@ -385,6 +397,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yanni.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Example/Example-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

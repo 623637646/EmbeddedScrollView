@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NestedScrollView
 
 class ViewController: UIViewController {
 
@@ -37,6 +38,9 @@ class ViewController: UIViewController {
         insideScrollView.addSubview(insideContent)
         insideScrollView.contentSize = insideContent.frame.size
         outerContent.addSubview(insideScrollView)
+        
+        // setup Internal ScrollView
+        outerScrollView.setupInternalScrollView(insideScrollView)
     }
 
 

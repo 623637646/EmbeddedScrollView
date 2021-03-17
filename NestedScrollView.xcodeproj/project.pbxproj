@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3B347C736A331D122D83C92B /* Pods_NestedScrollView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A40BBA69443490838A0C0C /* Pods_NestedScrollView.framework */; };
 		5CE3586A2601AC2300959B73 /* NestedScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CE358682601AC2300959B73 /* NestedScrollView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CE358A62601C32500959B73 /* NestedScrollViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE358A52601C32500959B73 /* NestedScrollViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +17,7 @@
 		5CE358652601AC2300959B73 /* NestedScrollView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NestedScrollView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CE358682601AC2300959B73 /* NestedScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NestedScrollView.h; sourceTree = "<group>"; };
 		5CE358692601AC2300959B73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CE358A52601C32500959B73 /* NestedScrollViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedScrollViewExtension.swift; sourceTree = "<group>"; };
 		B981FFE81487E09F6F128B85 /* Pods-NestedScrollView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NestedScrollView.debug.xcconfig"; path = "Target Support Files/Pods-NestedScrollView/Pods-NestedScrollView.debug.xcconfig"; sourceTree = "<group>"; };
 		D9A40BBA69443490838A0C0C /* Pods_NestedScrollView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NestedScrollView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -63,6 +65,7 @@
 			children = (
 				5CE358682601AC2300959B73 /* NestedScrollView.h */,
 				5CE358692601AC2300959B73 /* Info.plist */,
+				5CE358A52601C32500959B73 /* NestedScrollViewExtension.swift */,
 			);
 			path = NestedScrollView;
 			sourceTree = "<group>";
@@ -73,7 +76,6 @@
 				B981FFE81487E09F6F128B85 /* Pods-NestedScrollView.debug.xcconfig */,
 				1A0E64F10E578250B4CC37B0 /* Pods-NestedScrollView.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -120,6 +122,7 @@
 				TargetAttributes = {
 					5CE358642601AC2300959B73 = {
 						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
 					};
 				};
 			};
@@ -181,6 +184,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CE358A62601C32500959B73 /* NestedScrollViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +317,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B981FFE81487E09F6F128B85 /* Pods-NestedScrollView.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = ZQ7TZ3Q272;
@@ -329,6 +334,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.yanni.NestedScrollView;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -338,6 +344,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1A0E64F10E578250B4CC37B0 /* Pods-NestedScrollView.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = ZQ7TZ3Q272;
