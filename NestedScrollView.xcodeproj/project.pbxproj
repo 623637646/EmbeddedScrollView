@@ -7,13 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B347C736A331D122D83C92B /* Pods_NestedScrollView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A40BBA69443490838A0C0C /* Pods_NestedScrollView.framework */; };
 		5CE3586A2601AC2300959B73 /* NestedScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CE358682601AC2300959B73 /* NestedScrollView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A0E64F10E578250B4CC37B0 /* Pods-NestedScrollView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NestedScrollView.release.xcconfig"; path = "Target Support Files/Pods-NestedScrollView/Pods-NestedScrollView.release.xcconfig"; sourceTree = "<group>"; };
 		5CE358652601AC2300959B73 /* NestedScrollView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NestedScrollView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CE358682601AC2300959B73 /* NestedScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NestedScrollView.h; sourceTree = "<group>"; };
 		5CE358692601AC2300959B73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B981FFE81487E09F6F128B85 /* Pods-NestedScrollView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NestedScrollView.debug.xcconfig"; path = "Target Support Files/Pods-NestedScrollView/Pods-NestedScrollView.debug.xcconfig"; sourceTree = "<group>"; };
+		D9A40BBA69443490838A0C0C /* Pods_NestedScrollView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NestedScrollView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -21,17 +25,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B347C736A331D122D83C92B /* Pods_NestedScrollView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A5972DD283C7C9A1B40F083 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D9A40BBA69443490838A0C0C /* Pods_NestedScrollView.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5CE3585B2601AC2300959B73 = {
 			isa = PBXGroup;
 			children = (
 				5CE358672601AC2300959B73 /* NestedScrollView */,
 				5CE358662601AC2300959B73 /* Products */,
+				DC3EC3CCB96315BCEA2F98A0 /* Pods */,
+				5A5972DD283C7C9A1B40F083 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -52,6 +67,16 @@
 			path = NestedScrollView;
 			sourceTree = "<group>";
 		};
+		DC3EC3CCB96315BCEA2F98A0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B981FFE81487E09F6F128B85 /* Pods-NestedScrollView.debug.xcconfig */,
+				1A0E64F10E578250B4CC37B0 /* Pods-NestedScrollView.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -70,6 +95,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5CE3586D2601AC2300959B73 /* Build configuration list for PBXNativeTarget "NestedScrollView" */;
 			buildPhases = (
+				B9212145DA8032C14B4D454C /* [CP] Check Pods Manifest.lock */,
 				5CE358602601AC2300959B73 /* Headers */,
 				5CE358612601AC2300959B73 /* Sources */,
 				5CE358622601AC2300959B73 /* Frameworks */,
@@ -124,6 +150,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B9212145DA8032C14B4D454C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NestedScrollView-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5CE358612601AC2300959B73 /* Sources */ = {
@@ -260,6 +311,7 @@
 		};
 		5CE3586E2601AC2300959B73 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B981FFE81487E09F6F128B85 /* Pods-NestedScrollView.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -284,6 +336,7 @@
 		};
 		5CE3586F2601AC2300959B73 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1A0E64F10E578250B4CC37B0 /* Pods-NestedScrollView.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;

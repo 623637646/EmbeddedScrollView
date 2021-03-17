@@ -1,0 +1,27 @@
+PODS:
+  - EasySwiftHook (3.1.1):
+    - libffi-iOS (~> 3.3.3-iOS)
+  - libffi-iOS (3.3.3-iOS)
+  - NestedScrollView (0.0.1):
+    - EasySwiftHook (~> 3.1)
+
+DEPENDENCIES:
+  - NestedScrollView (from `../`)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - EasySwiftHook
+    - libffi-iOS
+
+EXTERNAL SOURCES:
+  NestedScrollView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  EasySwiftHook: 84cf2c0f9b95bb8e1fcc4484d86636e93fa5f0ab
+  libffi-iOS: 09ffcd51939f869b3764f896cb097db210325815
+  NestedScrollView: e6f59ba7f8f6171945fcbf18bae0766ef7705620
+
+PODFILE CHECKSUM: 41b1179ce8f7ce44e57ea22d4f900c14d84aae44
+
+COCOAPODS: 1.10.1
