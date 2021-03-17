@@ -8,41 +8,57 @@
 import UIKit
 import NestedScrollView
 
+class MyScrollView: UIScrollView {
+    deinit {
+        print("deinit called")
+    }
+}
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // outer
-        let outerContent = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height * 3))
-        let outerGradientLayer = CAGradientLayer()
-        outerGradientLayer.colors = [UIColor.orange.cgColor, UIColor.blue.cgColor]
-        outerGradientLayer.locations = [0, 1]
-        outerGradientLayer.frame = outerContent.bounds
-        outerContent.layer.addSublayer(outerGradientLayer)
+        let navigationBar = self.navigationController!.navigationBar
+        let outerScrollView = MyScrollView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - navigationBar.frame.maxY))
         
-        let outerScrollView = UIScrollView.init(frame: self.view.bounds)
+        let outerContent = self.createContentView(frame: CGRect.init(x: 0, y: 0, width: outerScrollView.frame.width, height: outerScrollView.frame.height * 3), topColor: .orange, bottomColor: .blue)
+
         outerScrollView.addSubview(outerContent)
         outerScrollView.contentSize = outerContent.frame.size
         self.view.addSubview(outerScrollView)
         
         // inside
-        let insideContent = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height * 2))
-        let insideGradientLayer = CAGradientLayer()
-        insideGradientLayer.colors = [UIColor.yellow.cgColor, UIColor.red.cgColor]
-        insideGradientLayer.locations = [0, 1]
-        insideGradientLayer.frame = insideContent.bounds
-        insideContent.layer.addSublayer(insideGradientLayer)
+        let insideScrollView = MyScrollView.init(frame: CGRect.init(x: 0, y: outerScrollView.frame.height, width: outerScrollView.frame.width / 2, height: outerScrollView.frame.height))
         
-        let insideScrollView = UIScrollView.init(frame: CGRect.init(x: 0, y: self.view.bounds.height, width: self.view.bounds.width, height: self.view.bounds.height))
+        let insideContent = self.createContentView(frame: CGRect.init(x: 0, y: 0, width: insideScrollView.frame.width, height: insideScrollView.frame.height * 2), topColor: .yellow, bottomColor: .red)
+        
         insideScrollView.addSubview(insideContent)
         insideScrollView.contentSize = insideContent.frame.size
         outerContent.addSubview(insideScrollView)
         
         // setup Internal ScrollView
-        outerScrollView.setupInternalScrollView(insideScrollView)
+        outerScrollView.embeddedScrollView = insideScrollView
     }
-
+    
+    func createContentView(frame: CGRect, topColor: UIColor, bottomColor: UIColor) -> UIView {
+        let contentView = UIView.init(frame: frame)
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [topColor.cgColor, bottomColor.cgColor]
+        gradientLayer.locations = [0, 1]
+        gradientLayer.frame = contentView.frame
+        contentView.layer.addSublayer(gradientLayer)
+        
+        let hight = 40
+        for index in 0 ... Int(contentView.frame.height) / hight {
+            let split = UIView.init(frame: CGRect.init(x: 0, y: CGFloat(index * hight), width: contentView.frame.width, height: 1))
+            split.backgroundColor = .black
+            contentView.addSubview(split)
+        }
+        return contentView
+    }
 
 }
 

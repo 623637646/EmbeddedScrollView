@@ -18,7 +18,7 @@
     [super viewDidLoad];
     
     // just make sure NestedScrollView works well in OC.
-    [[[UIScrollView alloc] init] setupInternalScrollView:[[UIScrollView alloc] init]];
+    [[UIScrollView alloc] init].embeddedScrollView = [[UIScrollView alloc] init];
 }
 
 /*
