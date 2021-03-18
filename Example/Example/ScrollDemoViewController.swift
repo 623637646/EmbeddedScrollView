@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import NestedScrollView
+import EmbeddedScrollView
 
 class MyScrollView: UIScrollView {
     deinit {

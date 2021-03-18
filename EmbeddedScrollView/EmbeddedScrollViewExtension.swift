@@ -1,6 +1,6 @@
 //
-//  NestedScrollViewExtension.swift
-//  NestedScrollView
+//  EmbeddedScrollViewExtension.swift
+//  EmbeddedScrollView
 //
 //  Created by Yanni Wang on 17/3/21.
 //

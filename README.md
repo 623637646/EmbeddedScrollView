@@ -1,2 +1,2 @@
-# NestedScrollView
-Nested Scroll View for iOS.
+# EmbeddedScrollView
+Embedded Scroll View for iOS.

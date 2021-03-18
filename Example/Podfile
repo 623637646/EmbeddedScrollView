@@ -4,6 +4,6 @@ platform :ios, '10.0'
 target 'Example' do
   use_frameworks!
 
-  pod 'NestedScrollView', :path=>'../'
+  pod 'EmbeddedScrollView', :path=>'../'
 
 end

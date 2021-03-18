@@ -1,5 +1,5 @@
 #
-#  Be sure to run `pod spec lint NestedScrollView.podspec' to ensure this is a
+#  Be sure to run `pod spec lint EmbeddedScrollView.podspec' to ensure this is a
 #  valid spec and to remove all comments including this before submitting the spec.
 #
 #  To learn more about Podspec attributes see https://docs.cocoapods.org/specification.html
@@ -15,9 +15,9 @@ Pod::Spec.new do |spec|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  spec.name         = "NestedScrollView"
+  spec.name         = "EmbeddedScrollView"
   spec.version      = "0.0.1"
-  spec.summary      = "Nested Scroll View for iOS."
+  spec.summary      = "Embedded Scroll View for iOS."
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -25,10 +25,10 @@ Pod::Spec.new do |spec|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   spec.description  = <<-DESC
-                      This is a Nested Scroll View for iOS..
+                      This is a Embedded Scroll View for iOS..
                    DESC
 
-  spec.homepage     = "https://github.com/623637646/NestedScrollView"
+  spec.homepage     = "https://github.com/623637646/EmbeddedScrollView"
   # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -81,7 +81,7 @@ Pod::Spec.new do |spec|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  spec.source       = { :git => "https://github.com/623637646/NestedScrollView.git", :tag => spec.version.to_s }
+  spec.source       = { :git => "https://github.com/623637646/EmbeddedScrollView.git", :tag => spec.version.to_s }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -92,10 +92,10 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "NestedScrollView/**/*.{swift}"
+  spec.source_files  = "EmbeddedScrollView/**/*.{swift}"
   # spec.exclude_files = "Classes/Exclude"
 
-  #spec.public_header_files = "NestedScrollView/NestedScrollView.h"
+  #spec.public_header_files = "EmbeddedScrollView/EmbeddedScrollView.h"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

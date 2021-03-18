@@ -6,7 +6,7 @@
 //
 
 #import "TableDemoViewController.h"
-@import NestedScrollView;
+@import EmbeddedScrollView;
 
 @interface EmbeddedTableViewCell : UITableViewCell<UITableViewDataSource>
 @property (nonatomic, strong) UITableView *embeddedTableView;
