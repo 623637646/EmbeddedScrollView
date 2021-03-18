@@ -14,7 +14,8 @@ class MyScrollView: UIScrollView {
     }
 }
 
-class ViewController: UIViewController {
+// TODO: uitable uicollectionview demo
+class ScrollDemoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +31,7 @@ class ViewController: UIViewController {
         self.view.addSubview(outerScrollView)
         
         // inside
-        let insideScrollView = MyScrollView.init(frame: CGRect.init(x: 0, y: outerScrollView.frame.height, width: outerScrollView.frame.width / 2, height: outerScrollView.frame.height))
+        let insideScrollView = MyScrollView.init(frame: CGRect.init(x: 0, y: outerScrollView.frame.height, width: outerScrollView.frame.width, height: outerScrollView.frame.height))
         
         let insideContent = self.createContentView(frame: CGRect.init(x: 0, y: 0, width: insideScrollView.frame.width, height: insideScrollView.frame.height * 2), topColor: .yellow, bottomColor: .red)
         

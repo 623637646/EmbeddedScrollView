@@ -45,10 +45,11 @@ public extension UIScrollView {
     }
     
     private func getNewY(oldY: CGFloat) -> CGFloat {
-        guard let embeddedScrollView = self.embeddedScrollView else {
+        guard let embeddedScrollView = self.embeddedScrollView,
+              let embeddedSuperView = embeddedScrollView.superview else {
             return oldY
         }
-        let embeddedFrameY = embeddedScrollView.frame.origin.y
+        let embeddedFrameY = embeddedSuperView.convert(embeddedScrollView.frame.origin, to: self).y
         switch self.state {
         case .ahead:
             if oldY <= embeddedFrameY {
@@ -110,6 +111,7 @@ public extension UIScrollView {
         }
     }
     
+    // TODO: 这个可以去掉
     enum State: Int {
         case ahead
         case embedded
