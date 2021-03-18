@@ -37,7 +37,6 @@ private class EmbeddedScrollViewDelegate: NSObject, UIScrollViewDelegate {
     }
 }
 
-// TODO: rename project and github
 public extension UIScrollView {
     
     private static var embeddedScrollViewKey = 0

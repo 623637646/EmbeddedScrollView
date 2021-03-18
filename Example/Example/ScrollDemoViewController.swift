@@ -14,7 +14,6 @@ class MyScrollView: UIScrollView {
     }
 }
 
-// TODO: uitable uicollectionview demo
 class ScrollDemoViewController: UIViewController, UIScrollViewDelegate {
 
     override func viewDidLoad() {
