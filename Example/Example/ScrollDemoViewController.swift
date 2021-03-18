@@ -15,26 +15,25 @@ class MyScrollView: UIScrollView {
 }
 
 // TODO: uitable uicollectionview demo
-class ScrollDemoViewController: UIViewController {
+class ScrollDemoViewController: UIViewController, UIScrollViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // outer
-        let navigationBar = self.navigationController!.navigationBar
-        let outerScrollView = MyScrollView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - navigationBar.frame.maxY))
+        let height = self.view.frame.height - self.navigationController!.navigationBar.frame.maxY
+        let width = self.view.frame.width
         
-        let outerContent = self.createContentView(frame: CGRect.init(x: 0, y: 0, width: outerScrollView.frame.width, height: outerScrollView.frame.height * 3), topColor: .orange, bottomColor: .blue)
-
+        // outer
+        let outerScrollView = MyScrollView.init(frame: CGRect.init(x: 0, y: 0, width: width, height: height))
+        outerScrollView.delegate = self
+        let outerContent = self.createContentView(frame: CGRect.init(x: 0, y: 0, width: width, height: height * 2.5), topColor: .red, bottomColor: .green)
         outerScrollView.addSubview(outerContent)
         outerScrollView.contentSize = outerContent.frame.size
         self.view.addSubview(outerScrollView)
         
         // inside
-        let insideScrollView = MyScrollView.init(frame: CGRect.init(x: 0, y: outerScrollView.frame.height, width: outerScrollView.frame.width, height: outerScrollView.frame.height))
-        
-        let insideContent = self.createContentView(frame: CGRect.init(x: 0, y: 0, width: insideScrollView.frame.width, height: insideScrollView.frame.height * 2), topColor: .yellow, bottomColor: .red)
-        
+        let insideScrollView = MyScrollView.init(frame: CGRect.init(x: 0, y: height / 2 + 100, width: width, height: height + 200))
+        let insideContent = self.createContentView(frame: CGRect.init(x: 0, y: 0, width: width - 20, height: height * 2), topColor: .blue, bottomColor: .red)
         insideScrollView.addSubview(insideContent)
         insideScrollView.contentSize = insideContent.frame.size
         outerContent.addSubview(insideScrollView)
@@ -59,6 +58,18 @@ class ScrollDemoViewController: UIViewController {
             contentView.addSubview(split)
         }
         return contentView
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+    }
+    
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        print("scrollViewDidScrollToTop")
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        print("scrollViewWillBeginDragging")
     }
 
 }
