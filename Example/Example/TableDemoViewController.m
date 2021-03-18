@@ -20,7 +20,7 @@
     if (self) {
         UITableView *embeddedTableView = [[UITableView alloc] init];
         embeddedTableView.dataSource = self;
-        [embeddedTableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"normalCell"];
+        [embeddedTableView registerClass:UITableViewCell.class forCellReuseIdentifier:NSStringFromClass(UITableViewCell.class)];
         [self.contentView addSubview:embeddedTableView];
         self.embeddedTableView = embeddedTableView;
     }
@@ -34,7 +34,7 @@
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"normalCell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(UITableViewCell.class) forIndexPath:indexPath];
     cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
     cell.contentView.backgroundColor = UIColor.orangeColor;
     return cell;
@@ -61,8 +61,8 @@ static NSUInteger embeddedTableViewIndex = 20;
     UITableView *outerTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - offsetY)];
     outerTableView.dataSource = self;
     outerTableView.delegate = self;
-    [outerTableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"normalCell"];
-    [outerTableView registerClass:EmbeddedTableViewCell.class forCellReuseIdentifier:@"embeddedCell"];
+    [outerTableView registerClass:UITableViewCell.class forCellReuseIdentifier:NSStringFromClass(UITableViewCell.class)];
+    [outerTableView registerClass:EmbeddedTableViewCell.class forCellReuseIdentifier:NSStringFromClass(EmbeddedTableViewCell.class)];
     [self.view addSubview:outerTableView];
 
 }
@@ -70,11 +70,11 @@ static NSUInteger embeddedTableViewIndex = 20;
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     UITableViewCell *cell = nil;
     if (indexPath.row == embeddedTableViewIndex) {
-        EmbeddedTableViewCell *embeddedCell = [tableView dequeueReusableCellWithIdentifier:@"embeddedCell" forIndexPath:indexPath];
+        EmbeddedTableViewCell *embeddedCell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(EmbeddedTableViewCell.class) forIndexPath:indexPath];
         tableView.embeddedScrollView = embeddedCell.embeddedTableView;
         cell = embeddedCell;
     } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"normalCell" forIndexPath:indexPath];
+        cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(UITableViewCell.class) forIndexPath:indexPath];
         cell.textLabel.text = [NSString stringWithFormat:@"%ld", indexPath.row];
     }
     return cell;

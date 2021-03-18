@@ -8,6 +8,35 @@
 import UIKit
 import EasySwiftHook
 
+private class EmbeddedScrollViewDelegate: NSObject, UIScrollViewDelegate {
+    
+    weak var originalDelegate: UIScrollViewDelegate?
+        
+    override func responds(to aSelector: Selector!) -> Bool {
+        guard !super.responds(to: aSelector) else {
+            return true
+        }
+        guard let originalDelegate = self.originalDelegate else {
+            return false
+        }
+        return originalDelegate.responds(to: aSelector)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollView.didScroll()
+        if let originalDelegate = self.originalDelegate {
+            originalDelegate.scrollViewDidScroll?(scrollView)
+        }
+    }
+    
+    override func forwardingTarget(for aSelector: Selector!) -> Any? {
+        if let target = super.forwardingTarget(for: aSelector) {
+            return target
+        }
+        return self.originalDelegate
+    }
+}
+
 // TODO: rename project and github
 public extension UIScrollView {
     
@@ -18,117 +47,77 @@ public extension UIScrollView {
         }
         
         set {
-            newValue?.isUserInteractionEnabled = false
+            newValue?.isScrollEnabled = false
             objc_setAssociatedObject(self, &UIScrollView.embeddedScrollViewKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            try! setupHookIfNeed()
+            self.setupIfNeed()
         }
     }
     
-    private func setupHookIfNeed() throws {
-        guard self.keyValueObservation == nil else {
+    private static var embeddedDelegateKey = 0
+    private var embeddedDelegate: EmbeddedScrollViewDelegate? {
+        get {
+            return objc_getAssociatedObject(self, &UIScrollView.embeddedDelegateKey) as? EmbeddedScrollViewDelegate
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &UIScrollView.embeddedDelegateKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    private func setupIfNeed() {
+        guard self.embeddedDelegate == nil else {
             return
         }
-        
-        self.keyValueObservation = self.observe(\.panGestureRecognizer.state) { (view, _) in
-            switch view.panGestureRecognizer.state {
-            case .began:
-                view.embeddedScrollViewContentOffsetYWhenTouchBegin = view.embeddedScrollView?.contentOffset.y ?? 0
-            default: break
-                
-            }
-        }
-        
-        _ = try hookInstead(object: self, selector: #selector(setter: UIScrollView.contentOffset), closure: { original, view, sel, point in
-            let newY = view.getNewY(oldY: point.y)
-            original(view, sel, CGPoint.init(x: point.x, y: newY))
-        } as @convention(block) ((UIScrollView, Selector, CGPoint) -> Void, UIScrollView, Selector, CGPoint) -> Void)
+        let newDelegate = EmbeddedScrollViewDelegate.init()
+        newDelegate.originalDelegate = self.delegate
+        self.embeddedDelegate = newDelegate
+        self.delegate = newDelegate
+        try! hookInstead(object: self, selector: #selector(setter: UIScrollView.delegate), closure: { _, view, _, delegate in
+            view.embeddedDelegate?.originalDelegate = delegate
+        } as @convention(block) ((UIScrollView, Selector, UIScrollViewDelegate?) -> Void, UIScrollView, Selector, UIScrollViewDelegate?) -> Void)
+        try! hookInstead(object: self, selector: #selector(getter: UIScrollView.delegate), closure: { _, view, _ in
+            return view.embeddedDelegate?.originalDelegate
+        } as @convention(block) ((UIScrollView, Selector) -> UIScrollViewDelegate?, UIScrollView, Selector) -> UIScrollViewDelegate?)
     }
     
-    private func getNewY(oldY: CGFloat) -> CGFloat {
+    fileprivate func didScroll() {
         guard let embeddedScrollView = self.embeddedScrollView,
               let embeddedSuperView = embeddedScrollView.superview else {
-            return oldY
+            return
+        }
+        guard self.frame.height.isLessThanOrEqualTo(embeddedScrollView.frame.height) else {
+            print("The height of the embedded ScrollView must be equal or greater than the height of the outer ScrollView")
+            return
         }
         let embeddedFrameY = embeddedSuperView.convert(embeddedScrollView.frame.origin, to: self).y
-        switch self.state {
-        case .ahead:
-            if oldY <= embeddedFrameY {
-                return oldY + self.embeddedScrollViewContentOffsetYWhenTouchBegin
-            } else {
-                embeddedScrollView.contentOffset.y = oldY - embeddedFrameY
-                self.state = .embedded
-                return embeddedFrameY
+        let diff = self.contentOffset.y - embeddedFrameY
+        let maxEmbeddedScrollViewOffsetY = embeddedScrollView.contentSize.height - embeddedScrollView.frame.height
+        let currentEmbeddedScrollViewOffsetY = embeddedScrollView.contentOffset.y
+        if currentEmbeddedScrollViewOffsetY.isZero {
+            // ahead
+            if self.contentOffset.y > embeddedFrameY {
+                embeddedScrollView.contentOffset.y += diff
+                self.contentOffset.y = embeddedFrameY
             }
-        case .embedded:
-            let newY = oldY - embeddedFrameY + self.embeddedScrollViewContentOffsetYWhenTouchBegin
-            if newY < 0 {
+        } else if currentEmbeddedScrollViewOffsetY.isEqual(to: maxEmbeddedScrollViewOffsetY) {
+            // tail
+            if self.contentOffset.y < embeddedFrameY {
+                embeddedScrollView.contentOffset.y += diff
+                self.contentOffset.y = embeddedFrameY
+            }
+        } else {
+            // embedded
+            let newEmbeddedOffsetY = embeddedScrollView.contentOffset.y + diff
+            if newEmbeddedOffsetY < 0 {
                 embeddedScrollView.contentOffset.y = 0
-                self.state = .ahead
-                return embeddedFrameY + newY
-            } else if newY > embeddedScrollView.contentSize.height - embeddedScrollView.frame.height {
-                embeddedScrollView.contentOffset.y = embeddedScrollView.contentSize.height - embeddedScrollView.frame.height
-                self.state = .tail
-                return embeddedFrameY + (newY - (embeddedScrollView.contentSize.height - embeddedScrollView.frame.height))
+                self.contentOffset.y = embeddedFrameY + diff
+            } else if newEmbeddedOffsetY > maxEmbeddedScrollViewOffsetY {
+                embeddedScrollView.contentOffset.y = maxEmbeddedScrollViewOffsetY
+                self.contentOffset.y = embeddedFrameY + diff
             } else {
-                embeddedScrollView.contentOffset.y = newY
-                return embeddedFrameY
+                embeddedScrollView.contentOffset.y = newEmbeddedOffsetY
+                self.contentOffset.y = embeddedFrameY
             }
-        case .tail:
-            if oldY >= embeddedFrameY {
-                return oldY + self.embeddedScrollViewContentOffsetYWhenTouchBegin - embeddedScrollView.frame.height
-            } else {
-                embeddedScrollView.contentOffset.y = (embeddedScrollView.contentSize.height - embeddedScrollView.frame.height) - (oldY - embeddedFrameY)
-                self.state = .embedded
-                return embeddedFrameY
-            }
-        }
-    }
-    
-    // MARK: Getter setter
-    
-    private static var embeddedScrollViewContentOffsetYWhenTouchBeginKey = 0
-    private var embeddedScrollViewContentOffsetYWhenTouchBegin: CGFloat {
-        get {
-            guard let number = objc_getAssociatedObject(self, &UIScrollView.embeddedScrollViewContentOffsetYWhenTouchBeginKey) as? NSNumber else {
-                return 0
-            }
-            return CGFloat.init(number.floatValue)
-        }
-        
-        set {
-            objc_setAssociatedObject(self, &UIScrollView.embeddedScrollViewContentOffsetYWhenTouchBeginKey, NSNumber.init(value: Float.init(newValue)), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
-    
-    private static var keyValueObservationKey = 0
-    var keyValueObservation: NSKeyValueObservation? {
-        get {
-            return objc_getAssociatedObject(self, &UIScrollView.keyValueObservationKey) as? NSKeyValueObservation
-        }
-        
-        set {
-            objc_setAssociatedObject(self, &UIScrollView.keyValueObservationKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
-    
-    // TODO: 这个可以去掉
-    enum State: Int {
-        case ahead
-        case embedded
-        case tail
-    }
-    
-    private static var stateKey = 0
-    private var state: State {
-        get {
-            guard let number = objc_getAssociatedObject(self, &UIScrollView.stateKey) as? NSNumber else {
-                return .ahead
-            }
-            return State.init(rawValue: number.intValue) ?? .ahead
-        }
-        
-        set {
-            objc_setAssociatedObject(self, &UIScrollView.stateKey, NSNumber.init(value: newValue.rawValue), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
 }
