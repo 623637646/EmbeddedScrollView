@@ -81,7 +81,8 @@ public extension UIScrollView {
     
     fileprivate func didScroll() {
         guard let embeddedScrollView = self.embeddedScrollView,
-              let embeddedSuperView = embeddedScrollView.superview else {
+              let embeddedSuperView = embeddedScrollView.superview,
+              embeddedScrollView.window != nil else {
             return
         }
         guard self.frame.height.isLessThanOrEqualTo(embeddedScrollView.frame.height) else {
