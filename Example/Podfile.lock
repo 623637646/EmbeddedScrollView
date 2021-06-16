@@ -1,9 +1,9 @@
 PODS:
-  - EasySwiftHook (3.1.1):
-    - libffi-iOS (~> 3.3.3-iOS)
-  - EmbeddedScrollView (1.0.0):
-    - EasySwiftHook (~> 3.1)
-  - libffi-iOS (3.3.3-iOS)
+  - EasySwiftHook (3.2.0):
+    - libffi-iOS (~> 3.3.6-iOS)
+  - EmbeddedScrollView (1.1.0):
+    - EasySwiftHook (~> 3.2.0)
+  - libffi-iOS (3.3.6-iOS)
 
 DEPENDENCIES:
   - EmbeddedScrollView (from `../`)
@@ -18,9 +18,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  EasySwiftHook: 84cf2c0f9b95bb8e1fcc4484d86636e93fa5f0ab
-  EmbeddedScrollView: d6e970034374be59c2e22b698c4815e82f4244f6
-  libffi-iOS: 09ffcd51939f869b3764f896cb097db210325815
+  EasySwiftHook: 010aa85ae565fcd34395e31c2feb9c44ae4a27e3
+  EmbeddedScrollView: 59d4c64dfce5fe30d47723778f2814bdd3679306
+  libffi-iOS: 2932b5feac77dc5de0eca4a72269e2c9928a26af
 
 PODFILE CHECKSUM: 5a0a073ef4dc532c63844b4b6045ba5e9b74a67a
 

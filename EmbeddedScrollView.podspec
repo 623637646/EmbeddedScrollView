@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "EmbeddedScrollView"
-  spec.version      = "1.0.1"
+  spec.version      = "1.1.0"
   spec.summary      = "Embedded Scroll View for iOS."
 
   # This description is used to generate tags and improve search results.
@@ -134,6 +134,6 @@ Pod::Spec.new do |spec|
   # spec.requires_arc = true
 
   # spec.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  spec.dependency 'EasySwiftHook', '~> 3.1'
+  spec.dependency 'EasySwiftHook', '~> 3.2.0'
 
 end
