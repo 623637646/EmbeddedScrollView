@@ -29,7 +29,7 @@ extension UIScrollView {
 pod 'EmbeddedScrollView'
 ```
 
-Feel free to send Pull Request to support [Carthage](https://github.com/Carthage/Carthage) or [Swift Packages](https://developer.apple.com/documentation/swift_packages).
+Or use Swift Package Manager. SPM is supported from **1.1.0**.
 
 # Requirements
 
