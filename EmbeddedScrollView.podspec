@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "EmbeddedScrollView"
-  spec.version      = "1.1.1"
+  spec.version      = "1.1.2"
   spec.summary      = "Embedded Scroll View for iOS."
 
   # This description is used to generate tags and improve search results.
