@@ -1,6 +1,7 @@
 # EmbeddedScrollView
 
-Add a vertical UIScrollView into another vertical UIScrollView for iOS. It supports Swift and Objective-C
+Add a vertical UIScrollView into another vertical UIScrollView for iOS. It makes users feel like it's a single UIScrollView. This tool resolve the gesture conflict between thw two UIScrollViews.
+It supports Swift and Objective-C
 
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/5275802/111632055-0f82c180-882f-11eb-87de-a8480dab060a.gif)
 
